@@ -1,11 +1,14 @@
 package main
 
+import (
+	"os"
+
+	"dockr.com/go/cmd"
+)
+
 func main() {
-
-}
-
-func check(err error) {
-	if err != nil {
-		panic(err)
+	if err := cmd.Execute(); err != nil {
+		os.Exit(1)
 	}
+
 }

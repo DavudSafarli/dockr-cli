@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/docker/docker/client"
 	"github.com/spf13/cobra"
 )
 
@@ -21,6 +22,13 @@ func Execute() error {
 	return rootCmd.Execute()
 }
 
+// GetDockerClient returns docker client for making requests
+func GetDockerClient() *client.Client {
+	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
+	check(err)
+	return cli
+}
+
 func encode(v interface{}) string {
 	buf := new(bytes.Buffer)
 	json.NewEncoder(buf).Encode(v)
@@ -29,4 +37,10 @@ func encode(v interface{}) string {
 
 func print(v interface{}) {
 	fmt.Fprint(os.Stdout, encode(v))
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
