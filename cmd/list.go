@@ -28,17 +28,10 @@ func ListContainers() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			var response = make([]map[string]interface{}, len(containers))
-			for i, con := range containers {
-				response[i] = make(map[string]interface{})
-				response[i]["Command"] = con.Command
-				response[i]["Created"] = con.Created
-				response[i]["Id"] = con.ID
-				response[i]["Image"] = con.Image
-				response[i]["Names"] = con.Names
-				response[i]["Ports"] = con.Ports
-				response[i]["State"] = con.State
-				response[i]["Status"] = con.Status
+			var response = make(map[string]interface{}, len(containers))
+			for _, container := range containers {
+				id := container.ID
+				response[id] = container
 			}
 			print(encode(response))
 			return nil

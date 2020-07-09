@@ -18,6 +18,7 @@ func Execute() error {
 		Short: "docker api client",
 		Long:  ``,
 	}
+	rootCmd.AddCommand(ListContainers())
 
 	return rootCmd.Execute()
 }
@@ -36,7 +37,7 @@ func encode(v interface{}) string {
 }
 
 func print(v interface{}) {
-	fmt.Fprint(os.Stdout, encode(v))
+	fmt.Fprint(os.Stdout, v)
 }
 
 func check(err error) {
