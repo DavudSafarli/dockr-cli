@@ -19,6 +19,7 @@ func Execute() error {
 		Long:  ``,
 	}
 	rootCmd.AddCommand(ListContainers())
+	rootCmd.AddCommand(ListenEvents())
 
 	return rootCmd.Execute()
 }
