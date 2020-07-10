@@ -20,6 +20,8 @@ func Execute() error {
 	}
 	rootCmd.AddCommand(ListContainers())
 	rootCmd.AddCommand(ListenEvents())
+	rootCmd.AddCommand(StartContainer())
+	rootCmd.AddCommand(StopContainer())
 
 	return rootCmd.Execute()
 }
